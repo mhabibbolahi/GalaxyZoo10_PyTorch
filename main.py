@@ -6,8 +6,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 import cnn_use_model
-app = FastAPI()
 
+app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 
