@@ -368,7 +368,7 @@ Recent state-of-the-art results on this dataset:
 | **ResNet101** | ~90% | 2024 | Standard ResNet architecture |
 | **InceptionV4** | ~90% | 2024 | Inception architecture |
 | **GC-SWGAN** | ~84% | 2025 | Semi-supervised with 90% labeled data |
-| **Custom CNN (This Project)** | **84%** | 2024 | **5-Block Deep CNN** |
+| **Custom CNN (This Project)** | **84%** | 2025 | **5-Block Deep CNN** |
 | **Simple CNN** | ~54-63% | 2024 | Basic architectures |
 
 #### Key Findings:
