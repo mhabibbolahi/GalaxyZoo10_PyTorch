@@ -175,7 +175,11 @@
 <div class="main-container">
     <form id="bigDataForm" action="/upload-file/" method="post" enctype="multipart/form-data">
         <h1>CNN-based Galaxy Morphology Recognition using Galaxy10 DECaLSz</h1>
-
+        <label for="network">Which network?</label>
+        <select id="network" name="network">
+            <option value="model.pth">simple CNN</option>
+            <option value="based_on_balanced_data_model.pth">balanced CNN</option>
+        </select>
 
         <label for="fileUpload">Choose file:</label>
         <input type="file" id="fileUpload" name="file" required>

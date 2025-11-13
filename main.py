@@ -1,6 +1,5 @@
 import shutil
 import uvicorn
-import numpy as np
 from fastapi import FastAPI, Form, Request, UploadFile, File
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -24,11 +23,11 @@ async def get_form(request: Request):
 
 
 @app.post("/upload-file/", response_class=HTMLResponse)
-async def upload_file(request: Request, file: UploadFile = File(...)):
+async def upload_file(request: Request,network: str = Form(...), file: UploadFile = File(...)):
     file_location = f"static/{file.filename}"
     with open(file_location, "wb") as f:
         shutil.copyfileobj(file.file, f)
-    result = cnn_use_model.main(file_location,'model.pth')
+    result = cnn_use_model.main(file_location, network)
 
     return templates.TemplateResponse("image_result.html",
                                       {"request": request, "file_url": file_location, "network": 'DeepCNN-5Block',"result":result})
