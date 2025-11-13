@@ -11,9 +11,9 @@ from collections import defaultdict
 class Config:
     """central settings of project"""
     # paths
-    TRAIN_DIR = path.join('data', 'train')
-    VAL_DIR = path.join('data', 'val')
-    MODEL_PATH = 'model.pth'
+    TRAIN_DIR = path.join('balanced_data', 'train')
+    VAL_DIR = path.join('balanced_data', 'val')
+    MODEL_PATH = 'based_on_balanced_data_model.pth'
 
     # hiper parameters
     IMAGE_SIZE = 256
@@ -221,45 +221,6 @@ def evaluate(model, test_loader, criterion, device):
     accuracy = correct / total
 
     return avg_loss, accuracy
-
-
-# def evaluate(model, test_loader, criterion, device):
-#     """Evaluate model per-class and overall on test set."""
-#     model.eval()
-# 
-#     class_loss = defaultdict(float)
-#     class_correct = defaultdict(int)
-#     class_total = defaultdict(int)
-# 
-#     with torch.no_grad():
-#         for images, labels in test_loader:
-#             images, labels = images.to(device), labels.to(device)
-#             outputs = model(images)
-#             loss = criterion(outputs, labels)
-# 
-#             _, preds = outputs.max(1)
-# 
-#             # محاسبه لا‌س و دقت برای هر کلاس
-#             for lbl in labels.unique():
-#                 mask = labels == lbl
-#                 class_loss[lbl.item()] += loss.item() * mask.sum().item() / labels.size(0)
-#                 class_correct[lbl.item()] += (preds[mask] == lbl).sum().item()
-#                 class_total[lbl.item()] += mask.sum().item()
-# 
-#     # محاسبه میانگین لا‌س و دقت برای هر کلاس
-#     per_class_metrics = {
-#         cls: {
-#             'loss': class_loss[cls] / (class_total[cls] or 1),
-#             'accuracy': class_correct[cls] / (class_total[cls] or 1)
-#         }
-#         for cls in class_total
-#     }
-# 
-#     # میانگین کلی از روی کلاس‌ها
-#     mean_loss = sum(v['loss'] for v in per_class_metrics.values()) / len(per_class_metrics)
-#     mean_acc = sum(v['accuracy'] for v in per_class_metrics.values()) / len(per_class_metrics)
-# 
-#     return mean_loss, mean_acc
 
 
 def train_model(model, num_epochs, train_loader, test_loader, optimizer, criterion, device, scheduler, min_delta,
